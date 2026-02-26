@@ -3,7 +3,7 @@ import amqplib from "amqplib";
 const senAutomation = async (routing_key,message)=>{
     try {
 
-        const connections = amqplib.connect("amqlib://localhost");
+        const connections = await amqplib.connect("amqlib://localhost");
 
         const channel = await connections.createChannel();
 
