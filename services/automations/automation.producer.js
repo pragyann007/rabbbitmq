@@ -1,9 +1,9 @@
-import amqplib from "amqplib";
+import amqp from "amqplib";
 
 const senAutomation = async (routing_key,message)=>{
     try {
 
-        const connections = await amqplib.connect("amqlib://localhost");
+        const connections = await amqp.connect("amqp://localhost");
 
         const channel = await connections.createChannel();
 

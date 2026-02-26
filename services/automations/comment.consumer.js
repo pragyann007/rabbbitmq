@@ -1,9 +1,9 @@
-import amqlib from "amqplib"
+import amqp from "amqplib"
 
 const commentConsumer = async()=>{
     try {
 
-        const connections = await amqlib.connect("amqlib://localhost");
+        const connections = await amqp.connect("amqp://localhost");
 
         const channel = await connections.createChannel();
 
@@ -14,6 +14,8 @@ const commentConsumer = async()=>{
 
 await channel.assertExchange(exchange,exchange_type,{durable:false})
 await channel.assertQueue(quee,{durable:false})
+
+await channel.bindQueue(quee,exchange,"comment.*")
 
 console.log("waiting comment automationss ....")
 
