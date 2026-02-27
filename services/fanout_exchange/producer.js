@@ -1,4 +1,4 @@
-import {amqp} from "amqplib"
+import amqp from "amqplib"
 
 const automationCreated = async (automation)=>{
   try {

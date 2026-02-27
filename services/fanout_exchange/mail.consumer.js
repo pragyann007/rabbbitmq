@@ -14,6 +14,9 @@ const mail =async ()=>{
 
       const quee = await channe.assertQueue("",{exclusive:true})
 
+      await channe.bindQueue(quee.queue,exchange,"");
+      
+
       console.log(`waiting for message ======>>>`)
 
 

@@ -3,7 +3,7 @@ import amqp from "amqplib"
 const saveAutomation = async ()=>{
 
 try {
-        const connection = await amqp.connect("amqlib://localhost")
+        const connection = await amqp.connect("amqp://localhost")
     
         const channel = await connection.createChannel();
     
@@ -12,8 +12,10 @@ try {
     
     await channel.assertExchange(exchange,exchange_type,{durable:false})
     const quee = await channel.assertQueue("",{exclusive:true});
+
+    await channel.bindQueue(quee.queue,exchange,"")
     
-    channel.connection(quee.queue,(msg)=>{
+    channel.consume(quee.queue,(msg)=>{
         const message = JSON.parse(msg.content.toString());
     
         console.log(`message recieved =====>>> \n  ${message}`);
