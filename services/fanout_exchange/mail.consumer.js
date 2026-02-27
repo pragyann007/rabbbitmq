@@ -5,19 +5,19 @@ const mail =async ()=>{
     try {
 
         const connection =await amqp.connect("amqp://localhost");
-        const channe = await amqp.createChannel();
+        const channe = await connection.createChannel();
 
   const exchange = "create_exchange"
       const exchange_type = "fanout"
 
       await channe.assertExchange(exchange,exchange_type,{durable:false})
 
-      const quee = await channe.assertQuee('',{exclusive:true});
+      const quee = await channe.assertQueue("",{exclusive:true})
 
       console.log(`waiting for message ======>>>`)
 
 
-      channe.consume(quee.quee,(msg)=>{
+      channe.consume(quee.queue,(msg)=>{
         const automation = JSON.parse(msg.content.toString())
         console.log("recieved msg ", automation)
         channe.ack(msg)
@@ -31,3 +31,5 @@ const mail =async ()=>{
     }
 
 }
+
+mail()

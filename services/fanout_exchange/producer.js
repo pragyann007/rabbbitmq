@@ -29,4 +29,15 @@ const automationCreated = async (automation)=>{
 
 }
 
-automationCreated();
+const cmtAutomation = {
+  ig_id:"a10bc12d34",
+  sys_id:"abc987",
+  type:"comment_automation",
+  trigger_text:"link",
+  reply_text:"instagram.com/pragyann007",
+  user_subscription:"pro",
+  automation_id:"a11298"
+}
+
+
+automationCreated(cmtAutomation);
